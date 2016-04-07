@@ -7,7 +7,7 @@ class HelloServer(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write('Hello!'.encode())
 
-server = HTTPServer(('0.0.0.0', 5000), HelloServer)
+server = HTTPServer(('0.0.0.0', 8080), HelloServer)
 try:
     server.serve_forever()
 except KeyboardInterrupt:
