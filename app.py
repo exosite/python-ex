@@ -1,5 +1,6 @@
 import os
-import logging
+import sys
+import socket
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -14,8 +15,13 @@ class HelloServer(BaseHTTPRequestHandler):
             self.wfile.write('{}={}\n'.format(*kv).encode())
 
 
+pid = os.getpid()
+hostname = socket.gethostname()
+
+
 def heartbeat():
-    logging.warn('YAY!')
+    sys.stdout.write('out: HELLO FROM {}@{}\n'.format(pid, hostname))
+    sys.stderr.write('err: HELLO FROM {}@{}\n'.format(pid, hostname))
     threading.Timer(1, heartbeat).start()
 threading.Timer(1, heartbeat).start()
 
