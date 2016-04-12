@@ -21,7 +21,9 @@ hostname = socket.gethostname()
 
 def heartbeat():
     sys.stdout.write('out: HELLO FROM {}@{}\n'.format(pid, hostname))
+    sys.stdout.flush()
     sys.stderr.write('err: HELLO FROM {}@{}\n'.format(pid, hostname))
+    sys.stderr.flush()
     threading.Timer(1, heartbeat).start()
 threading.Timer(1, heartbeat).start()
 
