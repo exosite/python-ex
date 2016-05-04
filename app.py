@@ -11,6 +11,9 @@ class HelloServer(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
         self.wfile.write('Hello!\n\n'.encode())
+        for kv in self.headers.items():
+            self.wfile.write('{}: {}\n'.format(*kv).encode())
+        self.wfile.write('\n'.encode())
         for kv in sorted(os.environ.items()):
             self.wfile.write('{}={}\n'.format(*kv).encode())
 
